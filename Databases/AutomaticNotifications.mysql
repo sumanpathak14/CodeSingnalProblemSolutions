@@ -4,3 +4,4 @@ CREATE PROCEDURE automaticNotifications()
     WHERE role not in ("admin", "premium")
 
     ORDER BY email;
+END
