@@ -1,0 +1,7 @@
+CREATE PROCEDURE mostExpensive()
+BEGIN
+	select name from Products
+    where (price*quantity)= (select MAX(price*quantity) from Products)
+    order by name
+    limit 1;
+END
