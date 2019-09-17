@@ -1,0 +1,8 @@
+CREATE PROCEDURE gradeDistribution()
+BEGIN
+	select Name, ID from Grades
+    where Final >Midterm1+Midterm2
+    OR
+    Final>Midterm1/4+Midterm2/4+Final/2
+    Order by substring(Name,1,3),ID;
+END
