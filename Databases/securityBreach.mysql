@@ -1,0 +1,6 @@
+CREATE PROCEDURE securityBreach()
+BEGIN
+	select * from users
+    where attribute REGEXP binary concat('^.{1,}(\%', first_name,'\_',second_name, '\%).{0,}$')
+    order by attribute;
+END
