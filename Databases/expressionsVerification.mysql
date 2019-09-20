@@ -1,0 +1,15 @@
+CREATE PROCEDURE expressionsVerification()
+BEGIN
+	select r.id,r.a,r.b,r.operation,r.c 
+    from (
+        select id,a,b,operation,c, 
+                case when operation = '+' then a+b
+                when operation = '-' then a-b
+                when operation = '/' then a/b
+                when operation = '*' then a*b
+                end as res
+         from expressions
+         ) r
+    where r.c=r.res    
+    order by r.id;
+END
