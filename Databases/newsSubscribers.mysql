@@ -1,0 +1,9 @@
+CREATE PROCEDURE newsSubscribers()
+BEGIN
+	select DISTINCT subscriber from full_year
+    where newspaper like '%Daily%'
+    UNION
+    select DISTINCT subscriber from half_year
+    where newspaper like '%Daily%'
+    order by subscriber;
+END
