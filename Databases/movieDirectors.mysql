@@ -1,0 +1,8 @@
+CREATE PROCEDURE movieDirectors()
+BEGIN
+	select director 
+    from moviesInfo
+    where year >2000
+    group by director having sum(oscars)>2
+    order by director;
+END
