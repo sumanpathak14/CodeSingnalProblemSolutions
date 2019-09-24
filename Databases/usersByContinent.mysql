@@ -1,0 +1,7 @@
+CREATE PROCEDURE usersByContinent()
+BEGIN
+	select continent,sum(users) as users
+    from countries
+    group by continent
+    order by sum(users) desc;
+END
