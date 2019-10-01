@@ -1,0 +1,7 @@
+CREATE PROCEDURE booksCatalogs()
+BEGIN
+	select extractvalue(xml_doc,'/descendant-or-self::author[1]') as author 
+    from catalogs
+    group by author
+    order by author;
+END
