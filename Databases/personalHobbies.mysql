@@ -1,0 +1,6 @@
+CREATE PROCEDURE personalHobbies()
+BEGIN
+	select name 
+    from people_hobbies
+    where instr(hobbies, 'sports') and instr(hobbies, 'reading');
+END
