@@ -1,0 +1,8 @@
+CREATE PROCEDURE orderOfSuccession()
+BEGIN
+	select case when (gender='M') then concat('King ',name)
+                when (gender='F') then concat('Queen ',name) end
+    as name 
+    from Successors
+    order by birthday asc;
+END
