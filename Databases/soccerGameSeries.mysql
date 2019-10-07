@@ -1,0 +1,24 @@
+CREATE PROCEDURE soccerGameSeries()
+BEGIN
+	select 
+        CASE
+            when stats.`first_team_wins` > stats.`second_team_wins` then 1
+            when stats.`second_team_wins` > stats.`first_team_wins` then 2
+            when stats.`goal_diff` >0 then 1
+            when stats.`goal_diff` <0 then 2
+            when stats.`first_team_points` > stats.`second_team_points` then 1
+            when stats.`second_team_points` > stats.`first_team_points` then 2
+            else 0
+        END as `winner`
+    from (
+        SELECT 
+        SUM(scores.`first_team_score`>scores.`second_team_score`) `first_team_wins`,
+        SUM(scores.`first_team_score`<scores.`second_team_score`) `second_team_wins`,
+        SUM(scores.`first_team_score`-scores.`second_team_score`) `goal_diff`,
+        SUM((scores.`match_host`=2)*scores.`first_team_score`) `first_team_points`,
+        SUM((scores.`match_host`=1)*scores.`second_team_score`) `second_team_points`
+        FROM 
+            scores
+        
+    ) as stats; 
+END
