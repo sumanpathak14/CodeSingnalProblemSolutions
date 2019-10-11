@@ -1,0 +1,7 @@
+CREATE PROCEDURE pastEvents()
+BEGIN
+	select name,event_date 
+    from Events
+    where event_date >= DATE_SUB((select MAX(event_date) from Events), INTERVAL 7 DAY) and event_date<(select MAX(event_date) from Events)
+    order by event_date desc;
+END
