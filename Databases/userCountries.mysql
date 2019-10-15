@@ -1,0 +1,7 @@
+CREATE PROCEDURE userCountries()
+BEGIN
+	select users.id, COALESCE(cities.country, 'unknown') as country 
+    from users
+    LEFT JOIN cities on users.city =cities.city
+    order by users.id;
+END
