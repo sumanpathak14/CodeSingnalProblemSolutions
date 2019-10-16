@@ -1,0 +1,9 @@
+CREATE PROCEDURE localCalendar()
+BEGIN
+	SELECT e.event_id,
+    CASE when s.hours='24' then date_format(date_add(e.date, INTERVAL s.timeshift MINUTE),"%Y-%m-%d %H:%i")
+    when s.hours='12' then date_format(date_add(e.date, INTERVAL s.timeshift MINUTE),"%Y-%m-%d %h:%i %p") END as formatted_date
+    from events e
+    join settings s
+    on e.user_id=s.user_id;
+END
