@@ -1,0 +1,31 @@
+CREATE PROCEDURE routeLength()
+BEGIN
+	SET @cnt:=1;
+    SET @len:=(select count(*) from cities);
+    
+    SET @xa:=0;
+    SET @ya:=0;
+    
+    SET @xb:=0;
+    SET @yb:=0;
+    
+    SET @res:=0;
+    
+    WHILE @cnt <@len do 
+    
+        SET @xa:=(select x from cities where id=@cnt);
+        SET @ya:=(select y from cities where id=@cnt);
+    
+        SET @xb:=(select x from cities where id=@cnt+1);
+        SET @yb:=(select y from cities where id=@cnt+1);
+    
+    
+        SET @res:=@res+SQRT((POWER((@xa-@xb),2)+POWER((@ya-@yb),2)));
+        SET @cnt:=@cnt+1;
+    
+    END WHILE;
+    
+    select ROUND(@res,9) as total;
+    
+    
+END
